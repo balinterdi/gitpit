@@ -1,3 +1,5 @@
+require "lib/gitpit_pivotal_tracker"
+
 Gitpit::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -29,4 +31,6 @@ Gitpit::Application.configure do
   # This is necessary if your schema can't be completely dumped by the schema dumper,
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
+
+  GitPit::PivotalTracker.mode = :test
 end

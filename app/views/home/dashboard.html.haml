@@ -1,0 +1,6 @@
+%h3 My Accounts
+
+- unless @account_names.empty?
+  %ul
+    - @account_names.each do |account_name|
+      %li= link_to account_name, "#"

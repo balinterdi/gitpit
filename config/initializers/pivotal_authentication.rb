@@ -1,4 +1,5 @@
 require 'gitpit_authentication'
+require "gitpit_pivotal_tracker"
 
 Rails.configuration.middleware.use Warden::Manager do |manager|
   # sets up a warden strategy for PT
@@ -13,7 +14,7 @@ Rails.configuration.middleware.use Warden::Manager do |manager|
 
     def authenticate!
       begin
-        token = PivotalTracker::Client.token(params["username"], params["password"])
+        token = GitPit::PivotalTracker.login(params["username"], params["password"])
         success!(token)
       rescue RestClient::Request::Unauthorized
         fail!("Could not login.")

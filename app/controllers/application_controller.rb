@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     unless warden.authenticated?
       warden.authenticate!
     else
-      PivotalTracker::Client.token = warden.user
+      GitPit::PivotalTracker.token = warden.user
     end
   end
 

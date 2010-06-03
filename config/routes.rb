@@ -2,6 +2,8 @@ Gitpit::Application.routes.draw do |map|
   root :to => 'home#index'
   get "home/index"
 
+  match "/dashboard" => "home#dashboard"
+
   match "/logout" => "session#destroy"
   match "/session" => "session#create", :via => "post"
 

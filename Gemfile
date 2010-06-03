@@ -9,7 +9,7 @@ gem 'mysql'
 gem 'rails3-generators'
 
 # Application specific
-gem 'pivotal-tracker', '0.1.3'
+gem 'pivotal-tracker', :git => 'git://github.com/sspinc/pivotal-tracker.git'
 gem 'warden'
 
 # Testing

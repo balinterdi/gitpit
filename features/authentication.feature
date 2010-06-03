@@ -4,8 +4,8 @@ Feature: Authentication
   As a Pivotal Tracker user
   I want to authenticate myself
 
-  Scenario: Log in through a form with a PT account
-    Given there is a PT account with username: "veronica", password: "secret"
+  Scenario: Log in through a form with a PT profile
+    Given there is a PT profile with username: "veronica", password: "secret"
     When I go to the home page
     And I fill in "Username" with "veronica"
     And I fill in "Password" with "secret"
@@ -15,7 +15,7 @@ Feature: Authentication
     But I should not see "Log in"
 
   Scenario: Failed login
-    Given there is no PT account with username: "veronica", password: "bogus"
+    Given there is no PT profile with username: "veronica", password: "bogus"
     When I go to the home page
     And I fill in "Username" with "veronica"
     And I fill in "Password" with "bogus"

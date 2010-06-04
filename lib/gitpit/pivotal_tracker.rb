@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-module GitPit  
+module Gitpit
   module PivotalTracker
     module Test
 
@@ -16,9 +16,10 @@ module GitPit
         @token = nil
       end
 
-      def account_names
+      def projects
         []
       end
+
     end
 
     module Production
@@ -34,19 +35,29 @@ module GitPit
         ::PivotalTracker::Client.token = nil
       end
 
+      def projects
+        ::PivotalTracker::Project.all
+      end
+
       def account_names
-        project_account_names = ::PivotalTracker::Project.all.map { |project| project.account }
+        project_account_names = projects.map { |project| project.account }
         project_account_names.sort.uniq
       end
+
+      def overall_velocity(account)
+          projects.select { |project| project.account.to_slug == account }.inject(0) do |velocity, project|
+          velocity + project.current_velocity.to_i
+        end
+      end
     end
-    
+
     def self.mode=(mode)
       extend Test if mode == :test
       extend Production if mode == :production
     end
-    
+
     # production by default
-    mode = :production
+    self.mode = :production
   end
 
 end

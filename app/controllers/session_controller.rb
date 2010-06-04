@@ -11,7 +11,7 @@ class SessionController < ApplicationController
 
   def destroy
     warden.logout
-    GitPit::PivotalTracker.logout
+    Gitpit::PivotalTracker.logout
     redirect_to root_path, :notice => "You have been logged out."
   end
 

@@ -6,6 +6,7 @@ Gitpit::Application.routes.draw do |map|
 
   match "/logout" => "session#destroy"
   match "/session" => "session#create", :via => "post"
+  match "/accounts/:account_name/iteration_plan" => "iteration_plan#show", :as => :iteration_plan
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

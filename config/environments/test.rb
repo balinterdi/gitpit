@@ -32,5 +32,5 @@ Gitpit::Application.configure do
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
 
-  GitPit::PivotalTracker.mode = :test
+  Gitpit::PivotalTracker.mode = :test
 end

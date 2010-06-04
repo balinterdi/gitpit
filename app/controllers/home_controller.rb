@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   end
   
   def dashboard
-    @account_names = GitPit::PivotalTracker.account_names
+    @account_names = Gitpit::PivotalTracker.account_names
   end
   
 end

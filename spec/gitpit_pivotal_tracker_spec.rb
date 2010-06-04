@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe GitPit::PivotalTracker do
+describe Gitpit::PivotalTracker do
   before :all do
-    GitPit::PivotalTracker.mode = :production
+    Gitpit::PivotalTracker.mode = :production
   end
   
   def new_project(hash)
@@ -16,7 +16,7 @@ describe GitPit::PivotalTracker do
   it "returns a unique list of the active projects' account names" do
     account_names = ["Secret Sauce Partners", "Pet Projects", "Secret Sauce Partners"]
     ::PivotalTracker::Project.should_receive(:all).and_return(account_names.map { |name| new_project(:account => name) } )
-    GitPit::PivotalTracker.account_names.should == ["Pet Projects", "Secret Sauce Partners"]
+    Gitpit::PivotalTracker.account_names.should == ["Pet Projects", "Secret Sauce Partners"]
   end
   
   it "returns the overall velocity for an account" do
@@ -27,6 +27,6 @@ describe GitPit::PivotalTracker do
       ]
       
     ::PivotalTracker::Project.should_receive(:all).and_return(projects.map { |p| new_project(p) } )
-    GitPit::PivotalTracker.overall_velocity("Secret Sauce Partners").should == 3
+    Gitpit::PivotalTracker.overall_velocity("Secret Sauce Partners").should == 3
   end
 end

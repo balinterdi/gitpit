@@ -16,3 +16,16 @@ Feature: Iteration overview
     And I am logged in as "veronica"
     When I go to the dashboard
     Then I should see "No account with active projects available"
+@wip
+  Scenario: User checks out iteration overview
+    Given I have the following PT projects:
+      | name | account | current_velocity |
+      | GitPit | Secret Sauce Partners | 5 |
+      | Operations | Secret Sauce Partners | 7 |
+      | The next big thing | Pet Projects | 1 |
+    And I am logged in as "veronica"
+    When I go to the dashboard
+    And I follow "Secret Sauce Partners"
+    Then I should see "12" as the overall velocity
+
+

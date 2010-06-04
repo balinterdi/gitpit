@@ -10,6 +10,7 @@ gem 'rails3-generators'
 
 # Application specific
 gem 'pivotal-tracker', :git => 'git://github.com/sspinc/pivotal-tracker.git'
+gem 'friendly_id'
 gem 'warden'
 
 # Testing

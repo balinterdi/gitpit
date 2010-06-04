@@ -38,6 +38,12 @@ module GitPit
         project_account_names = ::PivotalTracker::Project.all.map { |project| project.account }
         project_account_names.sort.uniq
       end
+      
+      def overall_velocity(account)
+        ::PivotalTracker::Project.all.select { |project| project.account == account }.inject(0) do |velocity, project|
+          velocity + project.current_velocity
+        end
+      end
     end
     
     def self.mode=(mode)

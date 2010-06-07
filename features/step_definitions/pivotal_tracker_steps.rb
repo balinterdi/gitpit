@@ -6,27 +6,28 @@ Given /^there is no PT profile with username: "([^\"]*)", password: "([^\"]*)"$/
   Gitpit::PivotalTracker.stub!(:login).and_return(nil)
 end
 
-Given /^I have the following PT accounts: "([^\"]*)"$/ do |names|
-  account_names = names.split(',').map { |account_name| account_name.strip }
-  Gitpit::PivotalTracker.stub!(:account_names).and_return(account_names)
+Given /^I have the following PT accounts:$/ do |table|
+  Gitpit::PivotalTracker.stub!(:account_names).and_return(table.hashes.map { |hash| hash[:name] })
+
+  if table.headers.include? "overall_velocity"
+    table.map_column!("overall_velocity") { |velocity| velocity.to_i }
+    table.hashes.each do |hash|
+      Gitpit::PivotalTracker.should_receive(:overall_velocity).with(hash[:name]).and_return(hash[:overall_velocity])
+    end
+  end
 end
 
 Given /^I have no PT accounts$/ do
   Gitpit::PivotalTracker.stub!(:account_names).and_return([])
 end
 
-Given /^I have the following PT projects:$/ do |table|
-  projects = table.hashes.map do |hash|
-    project = PivotalTracker::Project.new
-    hash.each do |attribute, value|
-      project.send("#{attribute}=", value)
-    end
-    project
-  end
-
-  Gitpit::PivotalTracker.stub!(:projects).and_return(projects)
+Transform /^(current iteration|backlog)$/ do |group_arg|
+  group_arg.gsub(" ", "_").to_sym
 end
 
-Then /^I should see a link called "([^\"]*)"$/ do |name|
-  page.should have_xpath("//a[text()='#{name}']")
+Given /^I have the following PT stories for the (current iteration|backlog) under the "([^\"]*)" account:$/ do |group, account, table|
+  group_stories_method = group == :current_iteration ? :current_stories : :backlog_stories
+  
+  Gitpit::PivotalTracker.should_receive(group_stories_method).with(account).any_number_of_times.and_return(table.hashes.map { |hash| Factory.build(:story, hash) })
 end
+

@@ -1,0 +1,20 @@
+<projects type="array">
+  <project>
+    <id>1</id>
+    <name>GitPit</name>
+    <account>Secret Sauce Partners</account>
+    <current_velocity>5</current_velocity>
+  </project>
+  <project>
+    <id>2</id>
+    <name>The Next Big Thing</name>
+    <account>Pet Projects</account>
+    <current_velocity>1</current_velocity>
+  </project>
+  <project>
+    <id>3</id>
+    <name>Operations</name>
+    <account>Secret Sauce Partners</account>
+    <current_velocity>2</current_velocity>
+  </project>
+</projects>

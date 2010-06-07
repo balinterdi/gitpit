@@ -20,7 +20,6 @@ module Gitpit
           []
         end
       end
-      
     end
 
     class Production
@@ -37,10 +36,6 @@ module Gitpit
           ::PivotalTracker::Client.token = nil
         end
 
-        def projects
-          ::PivotalTracker::Project.all
-        end
-
         def account_names
           project_account_names = projects.map { |project| project.account }
           project_account_names.sort.uniq
@@ -54,6 +49,12 @@ module Gitpit
 
         def current_stories(account)
           projects.collect { |project| project.iteration(:current).stories }.flatten
+        end
+        
+      private
+        
+        def projects
+          ::PivotalTracker::Project.all
         end
       end
       

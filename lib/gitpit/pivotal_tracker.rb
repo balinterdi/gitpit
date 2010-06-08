@@ -74,6 +74,10 @@ module Gitpit
         def current_stories(account=:all)
           projects(account).collect { |project| project.iteration(:current).stories }.flatten
         end
+
+        def backlog_stories(account=:all)
+          projects(account).collect { |project| project.iteration(:backlog).collect { |iteration| iteration.stories}.flatten }.flatten
+        end
         
       end
       

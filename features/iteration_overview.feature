@@ -16,7 +16,7 @@ Feature: Iteration overview
     And I am logged in as "veronica"
     When I go to the dashboard
     Then I should see "No account with active projects available"
-
+@wip
   Scenario: User checks out iteration overview
     Given I have the following PT projects:
       | name | account | current_velocity |

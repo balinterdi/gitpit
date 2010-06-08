@@ -19,6 +19,10 @@ module Gitpit
         def projects
           []
         end
+        
+        def account_names
+          []
+        end
       end
     end
 
@@ -41,21 +45,24 @@ module Gitpit
           project_account_names.sort.uniq
         end
 
-        def overall_velocity(account)
-          projects.select { |project| project.account.to_slug == account.to_slug }.inject(0) do |velocity, project|
+        def projects(account = :all)
+          if account == :all
+            ::PivotalTracker::Project.all
+          else
+            ::PivotalTracker::Project.all.select { |project| project.account == account }
+          end
+        end
+
+        def overall_velocity(account = :all)
+          projects(account).inject(0) do |velocity, project|
             velocity + project.current_velocity.to_i
           end
         end
 
-        def current_stories(account)
-          projects.collect { |project| project.iteration(:current).stories }.flatten
+        def current_stories(account = :all)
+          projects(account).collect { |project| project.iteration(:current).stories }
         end
         
-      private
-        
-        def projects
-          ::PivotalTracker::Project.all
-        end
       end
       
     end

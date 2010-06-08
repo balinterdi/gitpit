@@ -1,0 +1,6 @@
+%li
+  %span.project{:class => "color-#{project_color_for(story)}"}= project_name_for(story)
+  %span.story-type{ :class => story.story_type }
+  %span.estimation= story.estimate || 0
+  %span.name
+    %a{ :href => story.url, :target => "_blank", :title => story.name }= truncate(story.name, :options => { :length => 40 })

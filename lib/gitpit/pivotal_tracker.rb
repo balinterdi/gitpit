@@ -16,13 +16,14 @@ module Gitpit
           @token = nil
         end
 
-        def projects
-          []
-        end
-        
         def account_names
           []
         end
+
+        def projects
+          []
+        end
+                
       end
     end
 
@@ -70,7 +71,8 @@ module Gitpit
     cattr_accessor :mode
     
     def self.method_missing(method, *args, &block)
-      "Gitpit::PivotalTracker::#{@@mode.to_s.capitalize}".constantize.send(method, *args, &block)
+      _module = "Gitpit::PivotalTracker::#{@@mode.to_s.capitalize}".constantize
+      _module.send(method, *args, &block)
     end
     
     self.mode = :production

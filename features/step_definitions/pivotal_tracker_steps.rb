@@ -6,25 +6,25 @@ Given /^there is no PT profile with username: "([^\"]*)", password: "([^\"]*)"$/
   Gitpit::PivotalTracker.stub!(:login).and_return(nil)
 end
 
-Given /^I have the following PT accounts: "([^\"]*)"$/ do |names|
-  account_names = names.split(',').map { |account_name| account_name.strip }
-  Gitpit::PivotalTracker.stub!(:account_names).and_return(account_names)
+Given /^I have the following PT accounts:$/ do |table|
+  accounts = {}
+  table.hashes.each do |hash|
+    accounts[hash["name"]] ||= {}
+    if ( velocity = hash["overall_velocity"] )
+      accounts[hash["name"]]["overall_velocity"] = velocity
+    end
+  end
+  Gitpit::PivotalTracker.stub!(:account_names).and_return(accounts.keys)
+  
+  accounts.each do |account_name, account_data|
+    if account_data["overall_velocity"]
+      Gitpit::PivotalTracker.should_receive(:overall_velocity).with(account_name).and_return(account_data["overall_velocity"])
+    end
+  end
 end
 
 Given /^I have no PT accounts$/ do
   Gitpit::PivotalTracker.stub!(:account_names).and_return([])
-end
-
-Given /^I have the following PT projects:$/ do |table|
-  projects = table.hashes.map do |hash|
-    project = PivotalTracker::Project.new
-    hash.each do |attribute, value|
-      project.send("#{attribute}=", value)
-    end
-    project
-  end
-
-  Gitpit::PivotalTracker.stub!(:projects).and_return(projects)
 end
 
 Then /^I should see a link called "([^\"]*)"$/ do |name|

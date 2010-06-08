@@ -1,1 +1,6 @@
 %p.velocity= "Overall velocity: #{@overall_velocity}"
+
+#current-iteration-panel
+  %ul
+    - @current_stories.each do |story|
+      %li= story.name

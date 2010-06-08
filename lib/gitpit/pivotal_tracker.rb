@@ -20,10 +20,21 @@ module Gitpit
           []
         end
 
-        def projects
+        def projects(account=:all)
           []
         end
-                
+        
+        def overall_velocity(account=:all)
+          0
+        end
+        
+        def current_stories(account=:all)
+          []
+        end
+        
+        def backlog_stories(account=:all)
+          []
+        end
       end
     end
 
@@ -54,14 +65,14 @@ module Gitpit
           end
         end
 
-        def overall_velocity(account = :all)
+        def overall_velocity(account=:all)
           projects(account).inject(0) do |velocity, project|
             velocity + project.current_velocity.to_i
           end
         end
 
-        def current_stories(account = :all)
-          projects(account).collect { |project| project.iteration(:current).stories }
+        def current_stories(account=:all)
+          projects(account).collect { |project| project.iteration(:current).stories }.flatten
         end
         
       end

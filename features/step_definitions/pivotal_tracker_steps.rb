@@ -21,6 +21,13 @@ Given /^I have no PT accounts$/ do
   Gitpit::PivotalTracker.stub!(:account_names).and_return([])
 end
 
-Then /^I should see a link called "([^\"]*)"$/ do |name|
-  page.should have_xpath("//a[text()='#{name}']")
+Transform /^(current iteration|backlog)$/ do |group_arg|
+  group_arg.gsub(" ", "_").to_sym
 end
+
+Given /^I have the following PT stories for the (current iteration|backlog) under the "([^\"]*)" account:$/ do |group, account, table|
+  group_stories_method = group == :current_iteration ? :current_stories : :backlog_stories
+  
+  Gitpit::PivotalTracker.should_receive(group_stories_method).with(account).any_number_of_times.and_return(table.hashes.map { |hash| Factory.build(:story, hash) })
+end
+

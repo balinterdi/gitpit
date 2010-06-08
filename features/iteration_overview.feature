@@ -31,7 +31,11 @@ Feature: Iteration overview
 
 @wip
   Scenario: User sees the list of stories in the current iteration
-    Given I have the following PT stories for the current iteration under the "Secret Sauce Partners" account:
+    Given I have the following PT accounts:
+      | name |
+      | Secret Sauce Partners |
+      | Pet Projects |
+    And I have the following PT stories for the current iteration under the "Secret Sauce Partners" account:
       | name |
       | Authentication |
       | Iteration overview |

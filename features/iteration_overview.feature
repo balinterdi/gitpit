@@ -28,23 +28,25 @@ Feature: Iteration overview
     When I go to the dashboard
     And I follow "Secret Sauce Partners"
     Then I should see "12" as the overall velocity
+
 @wip
   Scenario: User sees the list of stories in the current iteration
-    Given I have the following PT stories:
-      | account | project | name | iteration |
-      | SSP | GitPit | Authentication | done |
-      | SSP | GitPit | Iteration overview | current |
-      | SSP | GitPit | Remember me | backlog |
-      | SSP | Operations | Take out the trash | current |
-      | Pet Projects | The next big thing | Brainstorming | current |
+    Given I have the following PT stories for the current iteration under the "Secret Sauce Partners" account:
+      | name |
+      | Authentication |
+      | Iteration overview |
+    And I have the following PT stories for the current iteration under the "Pet Projects" account:
+      | name |
+      | Brainstorming |
+    And I have the following PT stories for the backlog under the "Secret Sauce Partners" account:
+      | name |
+      | Remember me |
     And I am logged in as "veronica"
     When I go to the dashboard
-    And I follow "SSP"
-    Then I should see "Iteration overview" in the current iteration panel
-    And I should see "Take out the trash" in the current iteration panel
-    But I should not see "Remember me" in the current iteration panel
-    And I should not see "Brainstorming" in the current iteration panel
-  
-  
-  
+    And I follow "Secret Sauce Partners"
+    Then I should see "Authentication" in the current iteration panel
+    And I should see "Iteration overview" in the current iteration panel
+    But I should not see "Brainstorming" in the current iteration panel
+    And I should not see "Remember me" in the current iteration panel
+
     

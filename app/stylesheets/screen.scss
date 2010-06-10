@@ -18,7 +18,7 @@ header, footer, nav, section, aside, article {
 
 .container {
   @include container;
-  @include showgrid;
+  // @include showgrid;
 }
 header, footer, nav {
   @include column($blueprint-grid-columns);
@@ -31,24 +31,50 @@ section#content {
   @include column($content-columns, true);
   @include append(1);
   
-  ul {
-    @include no-bullet;
-    padding: 0;
-    margin: 0;
-    
-    li {
-      line-height: 2em;
-      border-bottom: 1px solid #999;
-      padding: 0 10px;
-    }
-    
-  }
-
   .panel {
     $panel-count: 2;
     @include column($content-columns / $panel-count);
     &.last {
       @include last;
+    }
+
+    ul {
+      @include no-bullet;
+      padding: 0;
+      margin: 0;
+
+      li {
+        line-height: 2em;
+        border-bottom: 1px solid #999;
+        padding: 0;
+        width: 430px;
+        clear: both;
+
+        span {
+          padding: 0 5px;
+          display: block;
+          float: left;
+          height: 2em;
+          
+          &.project {
+            width: 75px;
+            border-right: 1px solid #999;
+          }
+          
+          &.story-type {
+            width: 18px;
+          }
+          
+          &.name {
+            width: 260px;
+          }
+          
+          &.estimation {
+            width: 12px;
+          }
+        }
+      }
+
     }
 
     @include border-top-radius(10px);

@@ -67,6 +67,11 @@ module Gitpit
           end
         end
 
+        def project(project_id)
+          ::PivotalTracker::Project.find(project_id)
+        end
+        memoize :project
+
         def overall_velocity(account=:all)
           projects(account).inject(0) do |velocity, project|
             velocity + project.current_velocity.to_i
@@ -80,9 +85,9 @@ module Gitpit
         def backlog_stories(account=:all)
           projects(account).collect { |project| project.iteration(:backlog).collect { |iteration| iteration.stories}.flatten }.flatten
         end
-        
+
         private
-        
+
         def all_projects
           ::PivotalTracker::Project.all
         end

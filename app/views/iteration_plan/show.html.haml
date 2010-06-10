@@ -3,10 +3,8 @@
 %section#current-iteration-panel.panel
   %h2 Current
   %ul
-    - @current_stories.each do |story|
-      %li= story.name
+    =render :partial => "story", :collection => @current_stories, :as => :story
 %section#backlog-panel.last.panel
   %h2 Backlog
   %ul
-    - @backlog_stories.each do |story|
-      %li= story.name
+    =render :partial => "story", :collection => @backlog_stories, :as => :story

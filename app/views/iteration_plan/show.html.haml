@@ -1,10 +1,12 @@
 %p.velocity= "Overall velocity: #{@overall_velocity}"
 
-#current-iteration-panel
+%section#current-iteration-panel.panel
+  %h2 Current
   %ul
     - @current_stories.each do |story|
       %li= story.name
-#backlog-panel
+%section#backlog-panel.last.panel
+  %h2 Backlog
   %ul
     - @backlog_stories.each do |story|
       %li= story.name

@@ -7,9 +7,9 @@ Transform /^(current iteration|backlog) panel$/ do |group_arg|
 end
 
 Then /^I should see "([^\"]*)" in the ((?:current iteration|backlog) panel)$/ do |story_name, group|
-  page.find(:xpath, "//div[@id='#{group}-panel']").text.should include(story_name)
+  page.find(:xpath, "//section[@id='#{group}-panel']").text.should include(story_name)
 end
 
 Then /^I should not see "([^\"]*)" in the ((?:current iteration|backlog) panel)$/ do |story_name, group|
-  page.find(:xpath, "//div[@id='#{group}-panel']").text.should_not include(story_name)
+  page.find(:xpath, "//section[@id='#{group}-panel']").text.should_not include(story_name)
 end

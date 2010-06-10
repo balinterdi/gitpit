@@ -20,7 +20,6 @@ Feature: Iteration overview
     When I go to the dashboard
     Then I should see "No account with active projects available"
 
-@wip
   Scenario: User checks out iteration overview
     Given I have the following PT accounts:
       | name | overall_velocity |
@@ -29,7 +28,7 @@ Feature: Iteration overview
     When I go to the dashboard
     And I follow "Secret Sauce Partners"
     Then I should see "12" as the overall velocity
-@wip
+
   Scenario: User sees the list of stories on the iteration overview page
     Given I have the following PT accounts:
       | name |
@@ -58,4 +57,3 @@ Feature: Iteration overview
     And I should see "Remember me" in the backlog panel
     But I should not see "Kick-off" in the backlog panel
 
-    

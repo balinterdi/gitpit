@@ -23,15 +23,15 @@ module Gitpit
         def projects(account=:all)
           []
         end
-        
+
         def overall_velocity(account=:all)
           0
         end
-        
+
         def current_stories(account=:all)
           []
         end
-        
+
         def backlog_stories(account=:all)
           []
         end
@@ -41,7 +41,7 @@ module Gitpit
     class Production
       class << self
         extend ActiveSupport::Memoizable
-        
+
         def token=(value)
           ::PivotalTracker::Client.token = value
         end
@@ -92,18 +92,26 @@ module Gitpit
           ::PivotalTracker::Project.all
         end
         memoize :all_projects
-        
+
       end
-      
+
     end
 
     cattr_accessor :mode
-    
+
     def self.method_missing(method, *args, &block)
-      _module = "Gitpit::PivotalTracker::#{@@mode.to_s.capitalize}".constantize
-      _module.send(method, *args, &block)
+      module_to_use.send(method, *args, &block)
     end
-    
+
+    def self.respond_to?(method, include_private = false)
+      super || module_to_use.respond_to?(method, include_private)
+    end
+
+    private
+      def self.module_to_use
+        "Gitpit::PivotalTracker::#{@@mode.to_s.capitalize}".constantize
+      end
+
     self.mode = :production
   end
 

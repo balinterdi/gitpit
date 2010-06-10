@@ -40,6 +40,8 @@ module Gitpit
 
     class Production
       class << self
+        extend ActiveSupport::Memoizable
+        
         def token=(value)
           ::PivotalTracker::Client.token = value
         end
@@ -59,9 +61,9 @@ module Gitpit
 
         def projects(account = :all)
           if account == :all
-            ::PivotalTracker::Project.all
+            all_projects
           else
-            ::PivotalTracker::Project.all.select { |project| project.account == account }
+            all_projects.select { |project| project.account == account }
           end
         end
 
@@ -78,6 +80,13 @@ module Gitpit
         def backlog_stories(account=:all)
           projects(account).collect { |project| project.iteration(:backlog).collect { |iteration| iteration.stories}.flatten }.flatten
         end
+        
+        private
+        
+        def all_projects
+          ::PivotalTracker::Project.all
+        end
+        memoize :all_projects
         
       end
       

@@ -1,8 +1,8 @@
 Then /^I should see "([^\"]*)" as the overall velocity$/ do |velocity|
-  page.find(:xpath, "//p[@class='velocity']").text.should include(velocity)
+  page.find(:xpath, "//li[@class='caption']").text.should include(velocity)
 end
 
-Transform /^(current iteration|backlog) panel$/ do |group_arg|  
+Transform /^(current iteration|backlog) panel$/ do |group_arg|
   group_arg.gsub(" ", "-")
 end
 

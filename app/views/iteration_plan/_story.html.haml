@@ -1,7 +1,6 @@
 %li
-  %span.project.gitpit= project_name_for :story => story
-  %span.story-type
-    %img{ :src => "http://www.pivotaltracker.com/images/v3/icons/stories_view/bug_icon.png", :alt => story.story_type }
+  %span.project{:class => "color-#{project_color_for(story)}"}= project_name_for(story)
+  %span.story-type{ :class => story.story_type }
   %span.estimation= story.estimate || 0
   %span.name
-    %a{ :href => story.url, :target => "_blank", :title => "View story #12345" }= truncate(story.name, 40)
+    %a{ :href => story.url, :target => "_blank", :title => "View story #12345" }= truncate(story.name, :options => { :length => 40 })

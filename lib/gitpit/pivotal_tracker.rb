@@ -24,6 +24,10 @@ module Gitpit
           []
         end
 
+        def project_for_story(story)
+          nil
+        end
+
         def overall_velocity(account=:all)
           0
         end
@@ -35,6 +39,13 @@ module Gitpit
         def backlog_stories(account=:all)
           []
         end
+
+        private
+
+          def all_projects
+            []
+          end
+
       end
     end
 
@@ -72,6 +83,10 @@ module Gitpit
         end
         memoize :project
 
+        def project_for_story(story)
+          project(story.project_id)
+        end
+
         def overall_velocity(account=:all)
           projects(account).inject(0) do |velocity, project|
             velocity + project.current_velocity.to_i
@@ -88,10 +103,10 @@ module Gitpit
 
         private
 
-        def all_projects
-          ::PivotalTracker::Project.all
-        end
-        memoize :all_projects
+          def all_projects
+            ::PivotalTracker::Project.all
+          end
+          memoize :all_projects
 
       end
 

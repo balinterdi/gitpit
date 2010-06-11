@@ -20,17 +20,47 @@ header, footer, nav, section, aside, article {
   @include container;
   // @include showgrid;
 }
+
 header, footer, nav {
   @include column($blueprint-grid-columns);
 }
-nav ul {
-  @include horizontal-list;
+
+nav {
+  @include append-bottom(2em);
+
+  padding: 10px 0;
+  background-color: #eee;
+
+  ul {
+    @include horizontal-list;
+    padding-left: 1em;
+
+    li {
+
+      a {
+        font-size: 1.2em;
+        color: #444;
+        text-decoration: none;
+
+        &:hover {
+         text-decoration: underline;
+        }
+      }
+
+      &.caption {
+        @include float-right;
+        font-size: 1.2em;
+      }
+
+    }
+  }
 }
+
 section#content {
   @include prepend(1);
   @include column($content-columns, true);
   @include append(1);
-  
+
   .panel {
     $panel-count: 2;
     @include column($content-columns / $panel-count);
@@ -55,20 +85,96 @@ section#content {
           display: block;
           float: left;
           height: 2em;
-          
+          &.name {
+            a {
+              color: #112138;
+              text-decoration: none;
+            }
+            &:hover {
+              text-decoration: underline;
+            }
+          }
           &.project {
             width: 75px;
             border-right: 1px solid #999;
+            border-bottom: 1px solid #999;
+
+            a {
+              color: white;
+              text-decoration: none;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+
+            &.color-0 {
+              background: #cd0028;
+            }
+
+            &.color-1 {
+              background: #cd00ab;
+            }
+
+            &.color-2 {
+              background: #8b0006;
+            }
+
+            &.color-3 {
+              background: #6200c3;
+            }
+
+            &.color-4 {
+              background: #000eb6;
+            }
+
+            &.color-5 {
+              background: #0079b3;
+            }
+
+            &.color-6 {
+              background: #00afa9;
+            }
+
+            &.color-7 {
+              background: #00b21d;
+            }
+
+            &.color-8 {
+              background: #8ba100;
+            }
+
+            &.color-9 {
+              background: #957400;
+            }
+
+            &.color-10 {
+              background: #951200;
+            }
           }
-          
+
           &.story-type {
             width: 18px;
+            padding: 0;
+            &.chore, &.bug, &.feature {
+              @include sprite-background("/images/gitpit-icons.png", 18px, 18px);
+              margin: 3px 0 0 2px;
+            }
+            &.feature {
+              @include sprite-column(1);
+            }
+            &.bug {
+              @include sprite-column(2);
+            }
+            &.chore {
+              @include sprite-column(3);
+            }
           }
-          
+
           &.name {
             width: 260px;
           }
-          
+
           &.estimation {
             width: 12px;
           }
@@ -78,7 +184,7 @@ section#content {
     }
 
     @include border-top-radius(10px);
-    @include linear-gradient(color-stops(#d0d0d0, #b5bdc1));
+    @include linear-gradient(color-stops(#f0f0f0, #d5dde1));
     @include box-shadow(#a0a0a0, 2px, 2px, 2px);
 
     h2 {
@@ -88,7 +194,7 @@ section#content {
       padding: 0 10px;
       margin: 0;
       border-bottom: 1px solid #999;
-      
+
       @include border-top-radius(10px);
     }
   }

@@ -1,4 +1,9 @@
-%p.velocity= "Overall velocity: #{@overall_velocity}"
+- content_for :breadcrumb do
+  »
+  = link_to "Integration Overview", iteration_plan_path( params[:account_name] )
+
+- content_for :overall_velocity do
+  %li.caption= "Overall velocity: #{@overall_velocity}"
 
 %section#current-iteration-panel.panel
   %h2 Current

@@ -3,4 +3,4 @@
   %span.story-type{ :class => story.story_type }
   %span.estimation= story.estimate || 0
   %span.name
-    %a{ :href => story.url, :target => "_blank", :title => "View story #12345" }= truncate(story.name, :options => { :length => 40 })
+    %a{ :href => story.url, :target => "_blank", :title => story.name }= truncate(story.name, :options => { :length => 40 })

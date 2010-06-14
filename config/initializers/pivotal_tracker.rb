@@ -5,3 +5,5 @@ if Rails.env.test?
 else
   Gitpit::PivotalTracker.mode = :production
 end
+
+Gitpit::PivotalTracker.use_ssl = true

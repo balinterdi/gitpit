@@ -8,6 +8,10 @@ module Gitpit
           @token = value
         end
 
+        def use_ssl=(value)
+          nil
+        end
+
         def login(username, password)
           @token = username
         end
@@ -55,6 +59,10 @@ module Gitpit
 
         def token=(value)
           ::PivotalTracker::Client.token = value
+        end
+
+        def use_ssl=(value)
+          ::PivotalTracker::Client.use_ssl = value
         end
 
         def login(username, password)

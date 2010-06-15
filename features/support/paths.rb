@@ -9,7 +9,9 @@ module NavigationHelpers
     case page_name
 
     when /the home\s?page/
-      '/'
+      root_path
+    when /the dashboard/
+      dashboard_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

@@ -1,0 +1,23 @@
+<iterations type="array">
+  <iteration>
+    <id type="integer">4</id>
+    <number type="integer">4</number>
+    <start type="datetime">2010/06/03 00:00:00 CEST</start>
+    <finish type="datetime">2010/06/10 00:00:00 CEST</finish>
+    <stories type="array">
+      <story>
+        <id type="integer">2</id>
+        <project_id type="integer">3</project_id>
+        <story_type>feature</story_type>
+        <url>http://www.pivotaltracker.com/story/show/1</url>
+        <estimate type="integer">1</estimate>
+        <current_state>started</current_state>
+        <name>Take down the trash</name>
+        <requested_by>Gabor Ratky</requested_by>
+        <owned_by>Gabor Ratky</owned_by>
+        <created_at type="datetime">2010/06/03 12:47:43 CEST</created_at>
+        <updated_at type="datetime">2010/06/03 17:09:08 CEST</updated_at>
+      </story>
+    </stories>
+  </iteration>
+</iterations>

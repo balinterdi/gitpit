@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "action_controller/metal"
 
-module GitPit
+module Gitpit
 
   class FailureApp < ActionController::Metal
 

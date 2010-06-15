@@ -6,9 +6,18 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_with_warden
 
   def authenticate_with_warden
-    warden.authenticate!
+    unless warden.authenticated?
+      warden.authenticate!
+    else
+      Gitpit::PivotalTracker.token = warden.user
+    end
   end
 
+  def logged_in?
+    warden.authenticated?
+  end
+  helper_method :logged_in?
+  
   private
     def warden
       env['warden']

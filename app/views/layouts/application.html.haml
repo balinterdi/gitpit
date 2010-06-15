@@ -15,10 +15,11 @@
         = user_panel
       %nav
         %ul
-          %li= link_to "Home", "/"
+          = yield :overall_velocity
+          %li
+            = link_to "Home", "/"
+            = yield :breadcrumb
       %section#content
         = flash_messages
         = yield
-      %aside
-        = yield :aside
-      %footer Copyright &copy; 2010, GitPit
+      %footer Copyright &copy; 2010, Secret Sauce Partners, Inc.

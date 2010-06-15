@@ -1,0 +1,8 @@
+%h3 My Accounts
+
+- unless @account_names.empty?
+  %ul
+    - @account_names.each do |account_name|
+      %li= link_to account_name, iteration_plan_path(:account_name => account_name.to_slug)
+- else
+  %p No account with active projects available.

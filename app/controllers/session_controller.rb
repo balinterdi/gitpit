@@ -5,13 +5,13 @@ class SessionController < ApplicationController
   def create
     if warden.authenticate!
       store_user_handle(params[:username])
-      redirect_to root_path, :notice => "You are now logged in."
+      redirect_to dashboard_path, :notice => "You are now logged in."
     end
   end
 
   def destroy
     warden.logout
-    PivotalTracker::Client.token = nil
+    Gitpit::PivotalTracker.logout
     redirect_to root_path, :notice => "You have been logged out."
   end
 
